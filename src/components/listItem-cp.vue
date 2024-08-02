@@ -6,6 +6,8 @@
       </v-card-actions>
     </v-card>
 </template>
+
+
 </template>
 
 
@@ -13,6 +15,7 @@
 <script>
 import { useTaskStore } from '../stores/store';
 import { storeToRefs } from 'pinia';
+
 
 
 
@@ -34,9 +37,13 @@ export default{
       });
 
 
+
+
     return{task , tasks , taskDes , taskDate , timeModal, taskTime,disableBtn}
 
   },
+
+  props:['condition']
 
  
 }

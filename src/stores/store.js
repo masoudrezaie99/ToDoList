@@ -10,7 +10,13 @@ export const useTaskStore = defineStore('taskStore',{
         timeModal:false,
         newTaskDate : null,
         taskTime:null,
-        overlay:false
+        overlay:false,
+        drawer:false,
+        menuItems: [
+            { text: 'Home', icon: 'mdi-home', link:'/' },
+            { text: 'Archive', icon: 'mdi-archive', link:'/archive'},
+            
+          ],
     }),
 
     

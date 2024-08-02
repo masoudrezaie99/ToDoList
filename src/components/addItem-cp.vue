@@ -85,7 +85,6 @@ export default{
   setup(){
     const taskStore = useTaskStore()
     const {task , tasks , taskDes , taskDate , timeModal, taskTime,disableBtn} = storeToRefs(taskStore)
-    taskStore.updateTasks()
    
     const addTask = ()=>{
       taskStore.addTask()
