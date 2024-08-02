@@ -20,12 +20,6 @@
       </v-card-actions>
     </v-card>
 
-    <v-card title="Gym" subtitle="10:30 am" text="hitting gym with bro">
-      <v-card-actions>
-        <v-btn>done</v-btn>
-      </v-card-actions>
-    </v-card>
-
     
   </v-card>
 
@@ -124,18 +118,18 @@ export default{
   setup(){
     const taskStore = useTaskStore()
     const {overlay , task , tasks , taskDes , taskDate , timeModal, taskTime,disableBtn} = storeToRefs(taskStore)
-    // taskStore.updateTasks()
+    taskStore.updateTasks()
    
     const addTask = ()=>{
       taskStore.addTask()
   }
 
-  // window.addEventListener("storage", (event) => {
-  //       if (event.key === "ToDoTasks") {
-  //         taskStore.updateTasks()
-  //       }
+  window.addEventListener("storage", (event) => {
+        if (event.key === "ToDoTasks") {
+          taskStore.updateTasks()
+        }
         
-  //     });
+      });
 
 
     return{overlay , task , tasks , taskDes , taskDate , timeModal, taskTime, addTask,disableBtn}

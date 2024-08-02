@@ -41,8 +41,7 @@ export const useTaskStore = defineStore('taskStore',{
             }
 
             this.tasks.push(newTask)
-            console.log(JSON.stringify(this.Tasks))
-            // localStorage.ToDoTasks = this.Tasks
+            localStorage.ToDoTasks = JSON.stringify(this.tasks)
             
             this.overlay=false
             this.task=''
@@ -56,7 +55,7 @@ export const useTaskStore = defineStore('taskStore',{
 
         updateTasks(){
             if (localStorage.ToDoTasks)
-              this.Tasks = JSON.parse(localStorage.ToDoTasks);
+              this.tasks = JSON.parse(localStorage.ToDoTasks);
         },
     }
 })
