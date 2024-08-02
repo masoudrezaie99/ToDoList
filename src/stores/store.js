@@ -38,6 +38,7 @@ export const useTaskStore = defineStore('taskStore',{
                 description:this.taskDes,
                 date:this.computedDate,
                 time:this.taskTime,
+                isdone:false
             }
 
             this.tasks.push(newTask)
