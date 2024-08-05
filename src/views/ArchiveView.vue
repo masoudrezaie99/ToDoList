@@ -2,7 +2,11 @@
   <v-card height="100%" min-width="120px" color="blue-grey-lighten-4">
 
 
-    <listItemCp/>
+    <template v-for="item in tasks" :key="item.title">
+    <v-card :title="item.title" :subtitle="item.date + ' - ' + item.time" :text="item.description">
+      
+    </v-card>
+</template>
 
     
   </v-card>
@@ -14,29 +18,22 @@
 <script>
 import { useTaskStore } from '../stores/store';
 import { storeToRefs } from 'pinia';
-import listItemCp from '../components/listItem-cp.vue';
+
 
 
 
 export default{
   setup(){
     const taskStore = useTaskStore()
-    const {overlay} = storeToRefs(taskStore)
-   
-  
- 
+    const {task , tasks , taskDes , taskDate , timeModal, taskTime} = storeToRefs(taskStore)
+    taskStore.updateTasks()
 
-  
-
-
-    return{overlay}
+    return{task , tasks , taskDes , taskDate , timeModal, taskTime}
 
   },
 
 
-  components:{
-    listItemCp,
-  }
+
 
  
 }

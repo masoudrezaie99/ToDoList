@@ -4,21 +4,31 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: () => import( '../views/HomeView.vue')
+    component: () => import( '../views/HomeView.vue'),
+    meta:{
+      title:'Home'
+  }
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import( '../views/ArchiveView.vue')
+    path: '/archive',
+    name: 'archive',
+    component: () => import( '../views/ArchiveView.vue'),
+    meta:{
+      title:'Archive'
+  }
   }
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
-})
+});
+
+
+
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title || "Default Title";
+  next();
+});
 
 export default router
