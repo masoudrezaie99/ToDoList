@@ -20,24 +20,13 @@ export const useTaskStore = defineStore('taskStore',{
 
     
     getters:{
-        computedDate(){
-            const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-            const d = new Date(this.taskDate)
-            const date = d.getDate()
-            const month =  months[d.getMonth()]
-            const year = d.getFullYear()
-            return year + ' / ' + month + ' / ' + date
-        },
-
-
-        disableBtn(){
+   
+         disableBtn(){
             return this.task=='' || this.taskDate==null || this.taskTime==null ? false : true
         },
 
 
-        sortedTasks(){
-            return this.tasks.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-        }
+        
     },
 
 
@@ -66,7 +55,7 @@ export const useTaskStore = defineStore('taskStore',{
             this.taskDes=''
             this.taskDate=null
             this.taskTime=null
-
+            this.tasks.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
         },
 
 
