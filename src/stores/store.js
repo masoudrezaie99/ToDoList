@@ -8,7 +8,6 @@ export const useTaskStore = defineStore('taskStore',{
         taskDes:'',
         taskDate:null,
         timeModal:false,
-        newTaskDate : null,
         taskTime:null,
         overlay:false,
         drawer:false,
@@ -22,16 +21,22 @@ export const useTaskStore = defineStore('taskStore',{
     
     getters:{
         computedDate(){
+            const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
             const d = new Date(this.taskDate)
             const date = d.getDate()
-            const month =  parseInt(d.getMonth()) + 1
+            const month =  months[d.getMonth()]
             const year = d.getFullYear()
-            return year + '-' + month + '-' + date
+            return year + ' / ' + month + ' / ' + date
         },
 
 
         disableBtn(){
-            return this.task=='' || this.taskDes=='' || this.taskDate==null || this.taskTime==null ? false : true
+            return this.task=='' || this.taskDate==null || this.taskTime==null ? false : true
+        },
+
+
+        sortedTasks(){
+            return this.tasks.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
         }
     },
 
@@ -39,13 +44,19 @@ export const useTaskStore = defineStore('taskStore',{
 
     actions:{
         addTask(){
+            var dayList = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+            var monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+            this.taskDate.setHours(this.taskTime.split(":")[0])
+            this.taskDate.setMinutes(this.taskTime.split(":")[1])
+            
             const newTask = {
                 title:this.task,
                 description:this.taskDes,
-                date:this.computedDate,
-                time:this.taskTime,
-                isdone:false
+                date:this.taskDate,
+                isdone:false,
+                timeData:`${dayList[new Date(this.taskDate).getDay()]}, ${monthNames[new Date(this.taskDate).getMonth()]} ${new Date(this.taskDate).getDate()}, ${new Date(this.taskDate).getFullYear()} | ${new Date(this.taskDate).getHours()} : ${new Date(this.taskDate).getMinutes()}`
             }
+
 
             this.tasks.push(newTask)
             localStorage.ToDoTasks = JSON.stringify(this.tasks)

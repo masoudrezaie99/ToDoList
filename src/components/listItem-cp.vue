@@ -1,6 +1,6 @@
 <template>
     <template v-for="item in tasks" :key="item.title">
-    <v-card v-if="item.isdone==false" :title="item.title" :subtitle="item.date + ' - ' + item.time" :text="item.description">
+    <v-card v-if="item.isdone==false" :title="item.title" :subtitle="item.timeData" :text="item.description">
       <v-card-actions>
         <v-btn @click="item.isdone=true;">done</v-btn>
       </v-card-actions>
@@ -25,10 +25,10 @@ export default{
 
   setup(){
     const taskStore = useTaskStore()
-    const {task , tasks , taskDes , taskDate , timeModal, taskTime} = storeToRefs(taskStore)
+    const {task , tasks , taskDes , taskDate , timeModal, taskTime, timeData} = storeToRefs(taskStore)
     taskStore.updateTasks()
    
-
+    // watch local storages changes
   window.addEventListener("storage", (event) => {
         if (event.key === "ToDoTasks") {
           taskStore.updateTasks()
@@ -37,6 +37,8 @@ export default{
       });
 
 
+
+      // watch tasks array changes
       taskStore.$subscribe((mutation, state) => {
 
   mutation.type 
@@ -54,7 +56,7 @@ export default{
 
 
 
-    return{task , tasks , taskDes , taskDate , timeModal, taskTime}
+    return{task , tasks , taskDes , taskDate , timeModal, taskTime, timeData}
 
   },
 

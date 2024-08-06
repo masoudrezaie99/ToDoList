@@ -3,7 +3,7 @@
 
 
     <template v-for="item in tasks" :key="item.title">
-    <v-card :title="item.title" :subtitle="item.date + ' - ' + item.time" :text="item.description">
+      <v-card v-if="item.isdone==false" :title="item.title" :subtitle="item.timeData" :text="item.description">
       
     </v-card>
 </template>
@@ -25,10 +25,10 @@ import { storeToRefs } from 'pinia';
 export default{
   setup(){
     const taskStore = useTaskStore()
-    const {task , tasks , taskDes , taskDate , timeModal, taskTime} = storeToRefs(taskStore)
+    const {task , tasks , taskDes , taskDate , timeModal, taskTime, timeData} = storeToRefs(taskStore)
     taskStore.updateTasks()
 
-    return{task , tasks , taskDes , taskDate , timeModal, taskTime}
+    return{task , tasks , taskDes , taskDate , timeModal, taskTime, timeData}
 
   },
 
